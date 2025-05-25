@@ -1,14 +1,14 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/niwayandm/porto-react/main/src/assets/logo.png" width="100" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/logo-plain.svg" width="100" />
 </div>
 <h1 align="center">
   niwayandevina.com
 </h1>
 <p align="center">
-  The fourth iteration of <a href="https://niwayandevina.com/" target="_blank">niwayandevina.com</a> built with React.js and Vite.
+  The second iteration of <a href="https://niwayandevina.com/" target="_blank">niwayandevina.com</a> built with React.js and Vite.
 </p>
 
-![demo](https://raw.githubusercontent.com/niwayandm/porto-react/src/assets/demo.png)
+![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/demo.png)
 
 ## Installation and Setup
 
