@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(10px, -40px);
+        opacity: 0.6;
+    }
+}
+
+@keyframes background-pan {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animated-bg {
+    background: linear-gradient(270deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 600% 600%;
+    animation: background-pan 15s ease infinite;
+}
+
+.floating-dots::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 10px;
+    height: 10px;
+    background: #8b5cf6;
+    border-radius: 9999px;
+    opacity: 0.4;
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-dots::after {
+    content: '';
+    position: absolute;
+    bottom: 25%;
+    right: 15%;
+    width: 14px;
+    height: 14px;
+    background: #3b82f6;
+    border-radius: 9999px;
+    opacity: 0.3;
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+
+.animate-float {
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.logo-offset-shadow {
+  box-shadow:
+    4px 4px 0 #a855f7,
+    8px 8px 0 #3b82f6;
+  transition: transform 0.3s ease;
+}
+
+.logo-offset-shadow:hover {
+  transform: translateY(-2px);
+}
