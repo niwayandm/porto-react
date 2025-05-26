@@ -12,6 +12,8 @@ const Contact = ({ isVisible }) => {
 
   const { themeStyles, theme } = useTheme();
 
+  const emailHref = contactInfo.find(c => c.label === 'Email')?.href;
+
   return (
     <section id="contact" className="min-h-screen flex items-center py-20 bg-gray-800/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -23,7 +25,7 @@ const Contact = ({ isVisible }) => {
             Let's Connect
           </h2>
           <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and exciting projects. 
+            I'm always interested in new opportunities and exciting projects.
             Let's discuss how we can work together!
           </p>
 
@@ -51,11 +53,11 @@ const Contact = ({ isVisible }) => {
           </div>
 
           <button
-            onClick={() => window.open('mailto:allen@example.com', '_blank')}
+            onClick={() => window.open(emailHref)}
             className={`group px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl 
-              ${theme === 'synthwave' 
-                ? 'bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500' 
-                : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500'}
+              ${theme === 'synthwave'
+                          ? 'bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500'
+                          : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500'}
             `}
           >
             Send Message
