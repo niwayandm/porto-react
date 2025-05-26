@@ -1,27 +1,26 @@
 import { User, FileText, Briefcase, Phone, Code } from 'lucide-react';
 
-import MES from '../assets/img/portfolio/Dashboard/MES.png';
-import ThisWeb from '../assets/img/portfolio/Websites/This Website.png';
-import KIOSK from '../assets/img/portfolio/Websites/KIOSK.png';
-import CCTV from '../assets/img/portfolio/AI/CCTV.png';
-import AC from '../assets/img/portfolio/Websites/AssetManagement.png';
-import COA from '../assets/img/portfolio/Websites/COA.png';
-import AdmReport from '../assets/img/portfolio/Dashboard/AdmReport.png';
-import Airflow from '../assets/img/portfolio/Backend/Airflow.png';
-import WasteRoto from '../assets/img/portfolio/Dashboard/Waste.png';
-import BaliKamus from '../assets/img/portfolio/Mobile/BaliKamus.jpg';
-import ARMoto from '../assets/img/portfolio/Mobile/ARMoto.jpg';
-import ICMP from '../assets/img/portfolio/Dashboard/ICMP.png';
-import PE from '../assets/img/portfolio/Dashboard/PE.png';
-import NodeRed from '../assets/img/portfolio/Backend/NodeRed.png';
-import CS from '../assets/img/portfolio/Websites/CS.png';
-import PBI from '../assets/img/portfolio/Dashboard/PBI.png';
-import SPEED from '../assets/img/portfolio/Dashboard/Speed.png';
-import Credit from '../assets/img/portfolio/Websites/CreditEligibility.png';
-import Premi from '../assets/img/portfolio/Websites/Insurance.png';
-import Vaccine from '../assets/img/portfolio/Websites/Vaccine.png';
-import Tiket from '../assets/img/portfolio/AI/Tiket.jpg';
-import CCTV2 from '../assets/img/portfolio/AI/CCTV2.png';
+const MES = '/img/portfolio/Dashboard/MES.png';
+const ThisWeb = '/img/portfolio/Websites/This Website.png';
+const KIOSK = '/img/portfolio/Websites/KIOSK.png';
+const CCTV = '/img/portfolio/AI/CCTV.png';
+const AC = '/img/portfolio/Websites/AssetManagement.png';
+const AdmReport = '/img/portfolio/Dashboard/AdmReport.png';
+const Airflow = '/img/portfolio/Backend/Airflow.png';
+const WasteRoto = '/img/portfolio/Dashboard/Waste.png';
+const BaliKamus = '/img/portfolio/Mobile/BaliKamus.jpg';
+const ARMoto = '/img/portfolio/Mobile/ARMoto.jpg';
+const ICMP = '/img/portfolio/Dashboard/ICMP.png';
+const PE = '/img/portfolio/Dashboard/PE.png';
+const NodeRed = '/img/portfolio/Backend/NodeRed.png';
+const CS = '/img/portfolio/Websites/CS.png';
+const PBI = '/img/portfolio/Dashboard/PBI.png';
+const SPEED = '/img/portfolio/Dashboard/Speed.png';
+const Credit = '/img/portfolio/Websites/CreditEligibility.png';
+const Premi = '/img/portfolio/Websites/Insurance.png';
+const Vaccine = '/img/portfolio/Websites/Vaccine.png';
+const Tiket = '/img/portfolio/AI/Tiket.jpg';
+const CCTV2 = '/img/portfolio/AI/CCTV2.png';
 
 export const sections = [
   { id: 'home', label: 'Home', icon: User },
@@ -161,6 +160,21 @@ export const projects = [
   }
 ];
 
+export const education = [
+  {
+    degree: "Bachelor of Information Technology",
+    institution: "Gunadarma University",
+    duration: "2017 - 2021",
+    notes: "Graduated Cum Laude with a GPA of 3.75 / 4.00. Final project focused on sentiment analysis of online learning discourse on Twitter using K-Nearest Neighbor, deployed via a Flask web application."
+  },
+  {
+    degree: "High School - Science Major",
+    institution: "SMAN 4 Bekasi",
+    duration: "2014 - 2017",
+    notes: "Focused on natural sciences including mathematics, physics, chemistry, and biology, which built the foundation for my analytical and technical skills."
+  }
+];
+
 export const experience = [
   {
     title: "Web Application Specialist",
@@ -185,23 +199,23 @@ export const experience = [
 export const skillsCategories = {
   languages: [
     { skill: 'Python', level: '95%' },
+    { skill: 'PHP', level: '90%' },
     { skill: 'JavaScript', level: '90%' },
-    { skill: 'TypeScript', level: '80%' },
-    { skill: 'PHP', level: '75%' },
     { skill: 'SQL', level: '85%' },
+    { skill: 'TypeScript', level: '80%' },
     { skill: 'Dart', level: '70%' },
-    { skill: 'Java', level: '65%' }
   ],
   tools: [
+    { skill: 'MySQL / PostgreSQL / SQL Server', level: '75%' },
     { skill: 'React.js', level: '90%' },
     { skill: 'Node.js', level: '85%' },
+    { skill: 'Flutter', level: '75%' },
     { skill: 'Flask & FastAPI', level: '80%' },
-    { skill: 'Power BI / Tableau / Looker Studio', level: '75%' },
     { skill: 'Git', level: '85%' },
     { skill: 'Docker', level: '75%' },
-    { skill: 'Flutter', level: '75%' },
     { skill: 'Apache Airflow', level: '70%' },
-    { skill: 'Node-RED', level: '80%' }
+    { skill: 'Node-RED', level: '80%' },
+    { skill: 'Power BI / Tableau / Looker Studio', level: '75%' },
   ],
   machineLearning: [
     { skill: 'Computer Vision (YOLO, OCR)', level: '85%' },
