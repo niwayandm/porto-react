@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/logo-plain.svg" width="100" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/public/logo.svg" width="100" />
 </div>
 <h1 align="center">
   niwayandevina.com
@@ -12,16 +12,16 @@
 
 The site includes 2 **built-in themes** that lets users toggle between:
 
-- **Default Theme** — subtle blues and purples with floating orbs.
+- **Ocean Theme (Default)** — subtle blues and purples with floating orbs.
 - **Synthwave Theme** — neon pinks and purples with retro triangle accents and a synthwave-style grid background.
 
 The theme toggle is available in both desktop and mobile views.
 
-### Default Theme:
-![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/demo.png)
+### Ocean Theme:
+![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/public/demo.png)
 
 ### Synthwave Theme:
-![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/demo.png)
+![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/public/demo2.png)
 
 You can easily extend the design by modifying the `ThemeContext.jsx` file. Each theme entry includes:
 
