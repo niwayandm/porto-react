@@ -1,7 +1,10 @@
 import React from 'react';
 import { skillsCategories } from '../data/data';
+import { useTheme } from '../context/ThemeContext';
 
 const Skills = ({ isVisible }) => {
+  const { themeStyles, theme } = useTheme();
+
   return (
     <section id="skills" className="min-h-screen flex items-center py-16">
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6">
@@ -9,7 +12,7 @@ const Skills = ({ isVisible }) => {
           transform transition-all duration-1000
           ${isVisible.skills ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}
         `}>
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <h2 className={`text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-r ${themeStyles.gradient} bg-clip-text text-transparent`}>
             Skills & Expertise
           </h2>
 
@@ -31,19 +34,19 @@ const Skills = ({ isVisible }) => {
               <div className="grid grid-cols-2 gap-3">
                 {skillsCategories.languages.map((skill, index) => (
                   <div key={skill.skill} className={`
-                    bg-gray-800 px-3 py-3 rounded-xl border border-gray-700 hover:border-blue-500 
-                    transition-all duration-300 hover:scale-105 hover:shadow-xl
-                    transform
+                    bg-gray-800 px-3 py-3 rounded-xl border border-gray-700 
+                    transform transition-all duration-300 hover:scale-105 hover:shadow-xl 
+                    ${theme === 'synthwave' ? 'hover:border-pink-500' : 'hover:border-blue-500'}
                     ${isVisible.skills ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}
                   `} style={{
-                      transitionDelay: `${300 + (index * 100)}ms`
+                      transitionDelay: '0ms'
                     }}>
-                    <h4 className="font-semibold mb-2 text-blue-400 text-sm">
+                    <h4 className={`font-semibold mb-2 text-sm ${theme === 'synthwave' ? 'text-pink-400' : 'text-blue-400'}`}>
                       {skill.skill}
                     </h4>
                     <div className="w-full bg-gray-700 rounded-full h-2">
                       <div
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-1500 ease-out"
+                        className={`h-2 rounded-full transition-all duration-1500 ease-out ${theme === 'synthwave' ? 'bg-gradient-to-r from-pink-500 to-purple-500' : 'bg-gradient-to-r from-blue-500 to-purple-500'}`}
                         style={{
                           width: isVisible.skills ? skill.level : '0%',
                           transitionDelay: `${500 + (index * 100)}ms`
@@ -76,18 +79,17 @@ const Skills = ({ isVisible }) => {
                   </div>
                 </div>
 
-                <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300">
+                <div className={`bg-gray-800 p-4 rounded-xl border border-gray-700 transition-all duration-300 ${theme === 'synthwave' ? 'hover:border-pink-500' : 'hover:border-blue-500'}`}>
                   <ul className="space-y-2">
                     {skillsCategories.tools.map((skill, index) => (
                       <li key={skill.skill} className={`
-                        flex items-center justify-between text-gray-300 hover:text-blue-400 transition-colors duration-200
-                        transform
-                        ${isVisible.skills ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
+                        flex items-center justify-between transition-colors duration-200
+                        transform ${isVisible.skills ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
+                        ${theme === 'synthwave' ? 'text-gray-300 hover:text-pink-400' : 'text-gray-300 hover:text-blue-400'}
                       `} style={{
                           transitionDelay: `${600 + (index * 100)}ms`
                         }}>
                         <span className="font-medium">{skill.skill}</span>
-
                       </li>
                     ))}
                   </ul>
@@ -105,13 +107,13 @@ const Skills = ({ isVisible }) => {
                   </div>
                 </div>
 
-                <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 hover:border-blue-500 transition-all duration-300">
+                <div className={`bg-gray-800 p-4 rounded-xl border border-gray-700 transition-all duration-300 ${theme === 'synthwave' ? 'hover:border-pink-500' : 'hover:border-blue-500'}`}>
                   <ul className="space-y-2">
                     {skillsCategories.machineLearning.map((skill, index) => (
                       <li key={skill.skill} className={`
-                        flex items-center justify-between text-gray-300 hover:text-blue-400 transition-colors duration-200
-                        transform
-                        ${isVisible.skills ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
+                        flex items-center justify-between transition-colors duration-200
+                        transform ${isVisible.skills ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}
+                        ${theme === 'synthwave' ? 'text-gray-300 hover:text-pink-400' : 'text-gray-300 hover:text-blue-400'}
                       `} style={{
                           transitionDelay: `${800 + (index * 100)}ms`
                         }}>
