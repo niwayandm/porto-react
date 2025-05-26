@@ -8,7 +8,29 @@
   The second iteration of <a href="https://niwayandevina.com/" target="_blank">niwayandevina.com</a> built with React.js and Vite.
 </p>
 
+## Themes
+
+The site includes 2 **built-in themes** that lets users toggle between:
+
+- **Default Theme** — subtle blues and purples with floating orbs.
+- **Synthwave Theme** — neon pinks and purples with retro triangle accents and a synthwave-style grid background.
+
+The theme toggle is available in both desktop and mobile views.
+
+### Default Theme:
 ![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/demo.png)
+
+### Synthwave Theme:
+![demo](https://raw.githubusercontent.com/niwayandm/porto-react/refs/heads/main/src/assets/demo.png)
+
+You can easily extend the design by modifying the `ThemeContext.jsx` file. Each theme entry includes:
+
+- Gradient colors
+- Text and button styles
+- Accent visibility (e.g., floating dots or synthwave grid)
+- SVG gradient stops
+
+Simply add a new object to the `themes` map and hook it into the UI toggle.
 
 ## Installation and Setup
 
