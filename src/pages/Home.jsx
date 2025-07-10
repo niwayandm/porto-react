@@ -20,7 +20,8 @@ const Home = ({ isVisible, scrollToSection }) => {
 
     const canvas = document.getElementById('synthwave-canvas');
     const ctx = canvas.getContext('2d');
-    let w, h;
+    let w, h, animationId;
+
     const setCanvasSize = () => {
       w = canvas.width = window.innerWidth;
       h = canvas.height = window.innerHeight;
@@ -28,41 +29,145 @@ const Home = ({ isVisible, scrollToSection }) => {
     setCanvasSize();
     window.addEventListener('resize', setCanvasSize);
 
-    const lines = [];
-    const spacing = 50;
-    for (let i = -50; i < 50; i++) {
-      lines.push({ x: i * spacing, y: 0 });
+    let gridOffset = 0;
+    let time = 0;
+
+    // Draw the sun
+    const drawSun = () => {
+      const sunX = w / 2;
+      const sunY = h * 0.25;
+      const sunRadius = Math.min(w, h) * 0.08;
+
+      // Create gradient for sun
+      const gradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
+      gradient.addColorStop(0.5, '#ee4c7c');    // Hot pink (matches your theme)
+      gradient.addColorStop(1, '#c200fb');      // Keep your purple edge
+
+      // Draw sun circle
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw horizontal lines through sun
+      ctx.strokeStyle = '#0d0221';
+      ctx.lineWidth = 3;
+      const lineSpacing = sunRadius / 4;
+      for (let i = -3; i <= 3; i++) {
+        const y = sunY + (i * lineSpacing);
+        const lineWidth = Math.sqrt(sunRadius * sunRadius - (i * lineSpacing) * (i * lineSpacing)) * 2;
+        ctx.beginPath();
+        ctx.moveTo(sunX - lineWidth / 2, y);
+        ctx.lineTo(sunX + lineWidth / 2, y);
+        ctx.stroke();
+      }
+    };
+
+    // Draw 3D perspective grid
+    const gridSpacing = 100;
+    const draw3DGrid = () => {
+      const horizonY = h * 0.65;
+      const vanishingPointX = w / 2;
+      const vanishingPointY = horizonY;
+
+      const fov = 300; // focal length for perspective
+
+      const gridDepth = 2000; // how far grid extends into z space
+      const numLines = Math.floor(gridDepth / gridSpacing);
+
+      const speed = 4;
+      gridOffset += speed;
+      if (gridOffset > gridSpacing) {
+        gridOffset -= gridSpacing;
+      }
+
+      // Draw horizontal lines in perspective
+      for (let i = 1; i < numLines; i++) {
+        const z = i * gridSpacing - gridOffset;
+        if (z <= 0) continue;
+
+        const scale = fov / z;
+
+        const y = vanishingPointY + scale * 275; // ground offset below horizon
+
+        ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)';
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Draw vertical lines in perspective
+      const numVertical = 45;
+      for (let i = -numVertical; i <= numVertical; i++) {
+        const xWorld = i * gridSpacing;
+
+        const p0 = project3D(xWorld, gridSpacing - gridOffset, fov, vanishingPointX, vanishingPointY);
+        const p1 = project3D(xWorld, gridDepth, fov, vanishingPointX, vanishingPointY);
+
+        if (!p0 || !p1) continue;
+
+        if (
+          (p0.x < 0 && p1.x < 0) ||
+          (p0.x > w && p1.x > w)
+        ) {
+          continue;
+        }
+
+        ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.stroke();
+      }
+    };
+
+    function project3D(x, z, fov, cx, cy) {
+      if (z <= 0) return null;
+      const scale = fov / z;
+      return {
+        x: cx + x * scale,
+        y: cy + scale * 300,
+      };
     }
 
-    let offset = 0;
+    let lastTime = performance.now();
+    const draw = (now = performance.now()) => {
+      const deltaTime = (now - lastTime) / 1000; // seconds
+      lastTime = now;
 
-    const draw = () => {
       ctx.fillStyle = '#0d0221';
       ctx.fillRect(0, 0, w, h);
-      ctx.strokeStyle = '#ff00cc';
-      ctx.lineWidth = 1;
 
-      ctx.beginPath();
-      for (let i = 0; i < lines.length; i++) {
-        let { x } = lines[i];
-        ctx.moveTo(x + offset, 0);
-        ctx.lineTo(x + offset, h);
-      }
-      for (let i = 0; i < h / spacing; i++) {
-        ctx.moveTo(0, i * spacing);
-        ctx.lineTo(w, i * spacing);
-      }
-      ctx.stroke();
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, h);
+      bgGradient.addColorStop(0, '#0d0221');
+      bgGradient.addColorStop(0.5, '#1a0033');
+      bgGradient.addColorStop(1, '#0d0221');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, w, h);
 
-      offset += 0.5;
-      if (offset > spacing) offset = 0;
-      requestAnimationFrame(draw);
+      drawSun();
+      // drawMountains();
+
+      // slower speed
+      const speed = 2; // units per second
+      gridOffset += speed * deltaTime;
+      if (gridOffset > gridSpacing) gridOffset -= gridSpacing;
+
+      draw3DGrid();
+
+      animationId = requestAnimationFrame(draw);
     };
+
 
     draw();
 
     return () => {
       window.removeEventListener('resize', setCanvasSize);
+      if (animationId) cancelAnimationFrame(animationId);
     };
   }, [themeStyles]);
 
@@ -71,7 +176,7 @@ const Home = ({ isVisible, scrollToSection }) => {
       {themeStyles.id === 'synthwave' ? (
         <canvas
           id="synthwave-canvas"
-          className="absolute inset-0 w-full h-full z-0 mix-blend-screen opacity-30"
+          className="absolute inset-0 w-full h-full z-0"
         />
       ) : null}
 
@@ -113,10 +218,10 @@ const Home = ({ isVisible, scrollToSection }) => {
             <button
               onClick={() => scrollToSection('contact')}
               className={`px-8 py-3 border rounded-lg font-semibold transition-all duration-300 hover:scale-105
-                ${themeStyles.id === 'synthwave' 
-                  ? 'border-pink-600 hover:border-pink-400 hover:text-pink-400' 
+                ${themeStyles.id === 'synthwave'
+                  ? 'border-pink-600 hover:border-pink-400 hover:text-pink-400'
                   : 'border-gray-600 hover:border-blue-400 hover:text-blue-400'}
-              `}              
+              `}
             >
               Get In Touch
             </button>
