@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import 'devicon/devicon.min.css';
 
 // Import pages
 import Header from './pages/Header';
