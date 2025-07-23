@@ -1,4 +1,4 @@
-import { User, FileText, Briefcase, Phone, Code } from 'lucide-react';
+import { House, User, FileText, Briefcase, Phone, Code } from 'lucide-react';
 
 const MES = '/img/portfolio/Dashboard/MES.png';
 const ThisWeb = '/img/portfolio/Websites/This Website.png';
@@ -22,8 +22,16 @@ const Vaccine = '/img/portfolio/Websites/Vaccine.png';
 const Tiket = '/img/portfolio/AI/Tiket.jpg';
 const CCTV2 = '/img/portfolio/AI/CCTV2.png';
 
+const OpenCVIcon = '/img/icons/opencv-icon.svg';
+const AirflowIcon = '/img/icons/apacheairflow-icon.svg';
+const NodeRedIcon = '/img/icons/nodered-icon.svg';
+const PowerBIIcon = '/img/icons/powerbi-icon.svg';
+const ScikitLearnIcon = '/img/icons/scikitlearn-icon.svg';
+const FastAPIIcon = '/img/icons/fastapi-icon.svg';
+const KerasIcon = '/img/icons/keras-icon.svg';
+
 export const sections = [
-  { id: 'home', label: 'Home', icon: User },
+  { id: 'home', label: 'Home', icon: House },
   { id: 'about', label: 'About', icon: User },
   { id: 'skills', label: 'Skills', icon: Code },
   { id: 'resume', label: 'Resume', icon: FileText },
@@ -162,7 +170,7 @@ export const projects = [
 
 export const education = [
   {
-    degree: "Bachelor of Information Technology",
+    degree: "Bachelor of Engineering (Informatics Engineering)",
     institution: "Gunadarma University",
     duration: "2017 - 2021",
     notes: "Graduated Cum Laude with a GPA of 3.75 / 4.00. Final project focused on sentiment analysis of online learning discourse on Twitter using K-Nearest Neighbor, deployed via a Flask web application."
@@ -198,36 +206,42 @@ export const experience = [
 
 export const skillsCategories = {
   languages: [
-    { skill: 'Python', level: '95%' },
-    { skill: 'PHP', level: '90%' },
-    { skill: 'JavaScript', level: '90%' },
-    { skill: 'SQL', level: '85%' },
-    { skill: 'TypeScript', level: '80%' },
-    { skill: 'Dart', level: '70%' },
+    { skill: 'Python', devicon: 'devicon-python-plain colored' },
+    { skill: 'PHP', devicon: 'devicon-php-plain colored' },
+    { skill: 'JavaScript', devicon: 'devicon-javascript-plain colored' },
+    { skill: 'SQL', devicon: 'devicon-mysql-plain colored' },
+    { skill: 'TypeScript', devicon: 'devicon-typescript-plain colored' },
+    { skill: 'Dart', devicon: 'devicon-dart-plain colored' },
   ],
   tools: [
-    { skill: 'MySQL / PostgreSQL / SQL Server', level: '75%' },
-    { skill: 'React.js', level: '90%' },
-    { skill: 'Node.js', level: '85%' },
-    { skill: 'Flutter', level: '75%' },
-    { skill: 'Flask & FastAPI', level: '80%' },
-    { skill: 'Git', level: '85%' },
-    { skill: 'Docker', level: '75%' },
-    { skill: 'Apache Airflow', level: '70%' },
-    { skill: 'Node-RED', level: '80%' },
-    { skill: 'Power BI / Tableau / Looker Studio', level: '75%' },
+    { skill: 'MySQL / PostgreSQL / SQL Server', devicon: 'devicon-postgresql-plain colored' },
+    { skill: 'React.js', devicon: 'devicon-react-original colored' },
+    { skill: 'Node.js', devicon: 'devicon-nodejs-plain colored' },
+    { skill: 'CodeIgniter', devicon: 'devicon-codeigniter-plain colored' },
+    { skill: 'Flutter', devicon: 'devicon-flutter-plain colored' },
+    { skill: 'Flask & FastAPI', customIcon: FastAPIIcon },
+    { skill: 'Git', devicon: 'devicon-git-plain colored' },
+    { skill: 'Docker', devicon: 'devicon-docker-plain colored' },
+    { skill: 'Apache Airflow', customIcon: AirflowIcon },
+    { skill: 'Node-RED', customIcon: NodeRedIcon },
+    { skill: 'Power BI / Tableau / Looker Studio', customIcon: PowerBIIcon },
+    { skill: 'Selenium', devicon: 'devicon-selenium-original colored' },
   ],
-  machineLearning: [
-    { skill: 'Computer Vision (YOLO, OCR)', level: '85%' },
-    { skill: 'NLP (Sentiment, Ticket Categorization)', level: '80%' },
-    { skill: 'Scikit-learn', level: '80%' },
-    { skill: 'OpenCV', level: '85%' },
-    { skill: 'TensorFlow / Keras', level: '70%' },
-    { skill: 'Time Series Forecasting (RNN, N-BEATS)', level: '75%' },
-    { skill: 'Clustering, Regression, Classification', level: '80%' }
-  ]
+  machineLearning: {
+    tools: [
+      { skill: 'TensorFlow', devicon: 'devicon-tensorflow-original colored' },
+      { skill: 'Keras', customIcon: KerasIcon },
+      { skill: 'Scikit-learn', customIcon: ScikitLearnIcon },
+      { skill: 'OpenCV', customIcon: OpenCVIcon }
+    ],
+    techniques: [
+      { skill: 'Computer Vision (YOLO, OCR)' },
+      { skill: 'NLP (Sentiment, Ticket Categorization)' },
+      { skill: 'Time Series Forecasting (RNN, N-BEATS)' },
+      { skill: 'Clustering, Regression, Classification' }
+    ]
+  }
 };
-
 
 export const contactInfo = [
   {
