@@ -30,76 +30,64 @@ const Home = ({ isVisible, scrollToSection }) => {
     window.addEventListener('resize', setCanvasSize);
 
     let gridOffset = 0;
-    let time = 0;
+    const gridSpacing = 150; // spacing between grid lines
+    const GRID_SPEED = 0.6;
 
-    // Draw the sun
+    // draw the sun
     const drawSun = () => {
       const sunX = w / 2;
       const sunY = h * 0.25;
       const sunRadius = Math.min(w, h) * 0.08;
 
-      // Create gradient for sun
       const gradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius);
-      gradient.addColorStop(0.5, '#ee4c7c');    // Hot pink (matches your theme)
-      gradient.addColorStop(1, '#c200fb');      // Keep your purple edge
+      gradient.addColorStop(0.5, '#ee4c7c');
+      gradient.addColorStop(1, '#c200fb');
 
-      // Draw sun circle
       ctx.fillStyle = gradient;
       ctx.beginPath();
       ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Draw horizontal lines through sun
       ctx.strokeStyle = '#0d0221';
       ctx.lineWidth = 3;
       const lineSpacing = sunRadius / 4;
       for (let i = -3; i <= 3; i++) {
         const y = sunY + (i * lineSpacing);
-        const lineWidth = Math.sqrt(sunRadius * sunRadius - (i * lineSpacing) * (i * lineSpacing)) * 2;
+        const lw = Math.sqrt(sunRadius * sunRadius - (i * lineSpacing) * (i * lineSpacing)) * 2;
         ctx.beginPath();
-        ctx.moveTo(sunX - lineWidth / 2, y);
-        ctx.lineTo(sunX + lineWidth / 2, y);
+        ctx.moveTo(sunX - lw / 2, y);
+        ctx.lineTo(sunX + lw / 2, y);
         ctx.stroke();
       }
     };
 
-    // Draw 3D perspective grid
-    const gridSpacing = 100;
+    // 3D perspective grid
     const draw3DGrid = () => {
       const horizonY = h * 0.65;
       const vanishingPointX = w / 2;
       const vanishingPointY = horizonY;
 
-      const fov = 300; // focal length for perspective
-
-      const gridDepth = 2000; // how far grid extends into z space
+      const fov = 300;            // focal length for perspective
+      const gridDepth = 2000;     // how far grid extends into z space
       const numLines = Math.floor(gridDepth / gridSpacing);
 
-      const speed = 4;
-      gridOffset += speed;
-      if (gridOffset > gridSpacing) {
-        gridOffset -= gridSpacing;
-      }
-
-      // Draw horizontal lines in perspective
+      // horizontal lines
       for (let i = 1; i < numLines; i++) {
         const z = i * gridSpacing - gridOffset;
         if (z <= 0) continue;
 
         const scale = fov / z;
-
-        const y = vanishingPointY + scale * 275; // ground offset below horizon
+        const y = vanishingPointY + scale * 275;
 
         ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)';
         ctx.lineWidth = 1;
-
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(w, y);
         ctx.stroke();
       }
 
-      // Draw vertical lines in perspective
+      // vertical lines
       const numVertical = 45;
       for (let i = -numVertical; i <= numVertical; i++) {
         const xWorld = i * gridSpacing;
@@ -108,13 +96,7 @@ const Home = ({ isVisible, scrollToSection }) => {
         const p1 = project3D(xWorld, gridDepth, fov, vanishingPointX, vanishingPointY);
 
         if (!p0 || !p1) continue;
-
-        if (
-          (p0.x < 0 && p1.x < 0) ||
-          (p0.x > w && p1.x > w)
-        ) {
-          continue;
-        }
+        if ((p0.x < 0 && p1.x < 0) || (p0.x > w && p1.x > w)) continue;
 
         ctx.strokeStyle = 'rgba(255, 0, 255, 0.3)';
         ctx.lineWidth = 1;
@@ -128,10 +110,7 @@ const Home = ({ isVisible, scrollToSection }) => {
     function project3D(x, z, fov, cx, cy) {
       if (z <= 0) return null;
       const scale = fov / z;
-      return {
-        x: cx + x * scale,
-        y: cy + scale * 300,
-      };
+      return { x: cx + x * scale, y: cy + scale * 300 };
     }
 
     let lastTime = performance.now();
@@ -139,9 +118,9 @@ const Home = ({ isVisible, scrollToSection }) => {
       const deltaTime = (now - lastTime) / 1000; // seconds
       lastTime = now;
 
+      // background
       ctx.fillStyle = '#0d0221';
       ctx.fillRect(0, 0, w, h);
-
       const bgGradient = ctx.createLinearGradient(0, 0, 0, h);
       bgGradient.addColorStop(0, '#0d0221');
       bgGradient.addColorStop(0.5, '#1a0033');
@@ -150,18 +129,15 @@ const Home = ({ isVisible, scrollToSection }) => {
       ctx.fillRect(0, 0, w, h);
 
       drawSun();
-      // drawMountains();
 
-      // slower speed
-      const speed = 2; // units per second
-      gridOffset += speed * deltaTime;
+      // delta-time motion
+      gridOffset += GRID_SPEED * gridSpacing * deltaTime; // move in “grid units” per second
       if (gridOffset > gridSpacing) gridOffset -= gridSpacing;
 
       draw3DGrid();
 
       animationId = requestAnimationFrame(draw);
     };
-
 
     draw();
 
